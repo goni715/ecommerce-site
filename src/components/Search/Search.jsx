@@ -1,13 +1,13 @@
 import ProductCard from "../ProductList/ProductCard.jsx";
 
 
-const Wishlist = () => {
+const Search = () => {
     return (
         <>
             <div className="px-10 py-5">
-                <p className="text-heading3-bold my-10">Your Wishlist</p>
-                {/*<p>No items in your wishlist</p>*/}
-                <div className="flex flex-wrap justify-center gap-16">
+                <p className='text-heading3-bold my-10'>Search results for "Laptop"</p>
+                {/*<p className='text-body-bold my-5'>No product found</p>*/}
+                <div className="flex flex-wrap gap-16 justify-center">
                     <ProductCard/>
                     <ProductCard/>
                     <ProductCard/>
@@ -18,4 +18,4 @@ const Wishlist = () => {
     );
 };
 
-export default Wishlist;
+export default Search;

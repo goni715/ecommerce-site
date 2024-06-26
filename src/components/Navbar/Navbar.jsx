@@ -1,45 +1,69 @@
 import logo from '../../assets/images/logo.png';
 import profile from '../../assets/images/photo.png';
-import {Link} from "react-router-dom";
-import {ShoppingCart, CircleUserRound} from "lucide-react";
+import {Link, useLocation} from "react-router-dom";
+import {ShoppingCart, CircleUserRound, Search} from "lucide-react";
 import {useState} from "react";
 
 
 const Navbar = () => {
-    const [login, setLogin] = useState(true);
-    const [dropdown, setDropdown] = useState(false);
+    const [login, setLogin] = useState(false);
+    const [dropdown, setDropdown] = useState(false)
+    const location = useLocation()
+    const pathname = location.pathname;
 
     return (
         <>
             <div className="sticky top-0 z-10 px-2 sm:px-10 py-2 flex justify-between items-center bg-white">
                 <Link to="/">
-                    <img src={logo} alt="logo" className="w-[130px]"/>
+                    <img src={logo} alt="logo" className="w-[120px] md:w-[130px]"/>
                 </Link>
 
-                <div>
-                    <Link to="/">Home</Link>
+                <div className="hidden lg:flex gap-4 text-base-bold">
+                    <Link to="/" className={`${pathname==="/" && "text-red-1"}`}>Home</Link>
+                    <Link to="/wishlist" className={`${pathname==="/wishlist" && "text-red-1"}`}>Wishlist</Link>
+                    <Link to="/orders" className={`${pathname==="/orders" && "text-red-1"}`}>Orders</Link>
+                    <button className={``}>Logout</button>
                 </div>
 
+                <div className="flex gap-3 border border-grey-2 px-3 py-1 items-center rounded-lg">
+                    <input
+                        type="text"
+                        className="outline-none max-w-[120px] sm:w-auto"
+                        placeholder="Search..."
+                    />
+                    <button>
+                        <Search className="cursor-pointer h-4 w-4 hover:text-red-1" />
+                    </button>
+                </div>
+
+
                 <div className="flex gap-3 items-center relative">
-                    <Link to="/cart" className="flex items-center gap-3 border rounded-lg px-2 py-1 hover:bg-black hover:text-white">
+                    <Link to="/cart" className="hidden md:flex items-center gap-3 border rounded-lg px-2 py-1 hover:bg-black hover:text-white">
                         <ShoppingCart/>
-                        <p className="text-base-bold">Cart (0)</p>
+                        <p className="text-base-bold">(0)</p>
                     </Link>
                     {login ? (
                         <img src={profile} alt="logo" className="w-[25px] h-[25px] cursor-pointer" onClick={() => setDropdown(!dropdown)}/>
                     ) : (
-                        <Link to="/login">
+                        <button onClick={() => setDropdown(!dropdown)}>
                         <CircleUserRound className="cursor-pointer"/>
-                        </Link>
+                        </button>
                     )}
 
-                    {login && dropdown && (
+                    {dropdown && (
                         <div
-                            className="absolute top-10 right-5 flex flex-col gap-2 p-3 rounded-lg border bg-white text-base-bold">
-                            <Link to="wishlist" className="hover:text-red-1">Wishlist</Link>
-                            <Link to="wishlist" className="hover:text-red-1">Orders</Link>
-                          <p className="hover:text-red-1">Logout</p>
-                      </div>
+                            className="absolute top-12 right-5 flex flex-col gap-4 p-3 rounded-lg border bg-white text-base-bold lg:hidden">
+                            <Link to="/" className="hover:text-red-1"> Home</Link>
+                            {/*<Link to="/wishlist" className="hover:text-red-1">Wishlist</Link>*/}
+                            {/*<Link to="/orders" className="hover:text-red-1">Orders</Link>*/}
+                            <Link to="/cart"
+                                  className="flex items-center gap-3 border rounded-lg px-2 py-1 hover:bg-black hover:text-white">
+                                <ShoppingCart/>
+                                <p className="text-base-bold">(0)</p>
+                            </Link>
+                            {/*<p className="hover:text-red-1 cursor-pointer">Logout</p>*/}
+                            <p className="hover:text-red-1 cursor-pointer">Login</p>
+                        </div>
                     )}
 
                     {/*{login ? (*/}

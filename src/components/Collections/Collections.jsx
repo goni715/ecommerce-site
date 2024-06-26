@@ -10,13 +10,13 @@ const Collections = () => {
                 <p className="text-heading1-bold">Collections</p>
                 {/*<p className="text-body-bold">No collections found</p>*/}
                 <div className="flex flex-wrap justify-center items-center gap-8">
-                    <Link to="/collection/1">
+                    <Link to="/collections/1">
                         <img src={collection_1} alt="" className="h-[200px] rounded-lg cursor-pointer"/>
                     </Link>
-                    <Link to="/collection/2">
+                    <Link to="/collections/2">
                         <img src={collection_2} alt="" className="h-[200px] rounded-lg cursor-pointer"/>
                     </Link>
-                    <Link to="/collection/3">
+                    <Link to="/collections/3">
                         <img src={collection_3} alt="" className="h-[200px] rounded-lg cursor-pointer"/>
                     </Link>
 
